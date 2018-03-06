@@ -3,6 +3,8 @@ import * as Constants from '../constants/constants';
 const Waves = WavesAPI.create(WavesAPI.MAINNET_CONFIG);
 
 export function getTxs(address) {
+    // NOTE: limit 50
+    // v1 json != v2 json   
     return Waves.API.Node.v1.transactions.getList(address);
 }
 
