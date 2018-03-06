@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Member from './components/Member';
-import * as WavesAPI from 'waves-api';
+import Account from './components/Account';
 
 class App extends Component {
   constructor(props) {
@@ -13,9 +13,9 @@ class App extends Component {
     return (
       <div className="App">
           <div class="ufic_title_div">
-              <span class="ufic_title_span">UFIC Token Explorer</span>
+              <span class="ufic_title_span">UFIC Explorer</span>
           </div>
-          <div class="tabbable tabs-left">
+          <div class="tabbable tabs-left" style={{width: '100%'}}>
               <ul class="nav nav-tabs">
                   <li class="active">
                       <a href="#dongari_member" data-toggle="tab">동아리원</a>
@@ -29,10 +29,10 @@ class App extends Component {
               </ul>
               <div class="tab-content">
                   <div class="tab-pane active" id="dongari_member">
-                          <Member waves={this.props.waves} />
+                          <Member />
                   </div>
                   <div class="tab-pane" id="dongari_account">
-                          {/* TODO: <Account/> */}
+                          <Account />
                   </div>
                   <div class="tab-pane" id="vote">
                           {/* TODO: <Vote/> */}
@@ -69,16 +69,12 @@ class App extends Component {
           </div> */}
           <footer class="footer">
               <div class="container">
-                  <span class="text-muted">UFIC Token Explorer | created by @yguhan</span>
+                  <span class="text-muted">UFIC Explorer | created by <a href="http://steemit.com/@yguhan">@yguhan</a></span>
               </div>
           </footer>      
       </div>
     );
   }
-}
-
-App.defaultProps = {
-  waves : WavesAPI.create(WavesAPI.MAINNET_CONFIG),
 }
 
 export default App;
