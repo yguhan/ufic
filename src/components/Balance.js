@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import * as Constants from '../constants/constants'
+import * as Constants from '../constants/constants';
 import * as API from '../lib/api';
 import _ from 'underscore';
+import { parseFormattedAssetNumber } from '../lib/common';
 
 class Balance extends Component {
     constructor(props) {
@@ -25,10 +26,10 @@ class Balance extends Component {
 
         const wavesBalance = await API.getBalance(Constants.UFIC_WALLET_ADDRESS, Constants.WAVES_ASSET_ID);
         const uficBalance = await API.getBalance(Constants.UFIC_WALLET_ADDRESS, Constants.UFIC_ASSET_ID);
-
+        
         this.setState({
-            wavesBalance: wavesBalance.balance,
-            uficBalance: uficBalance.balance,
+            wavesBalance: wavesBalance,
+            uficBalance: uficBalance,
             fetching: false,
         });
     }
@@ -43,8 +44,8 @@ class Balance extends Component {
                     
                     {!fetching && 
                         <div>
-                            <p>Total WAVES: {wavesBalance}</p>
-                            <p>Total UFIC : {uficBalance}</p> 
+                            <p>Total WAVES: {parseFormattedAssetNumber(Constants.WAVES_ASSET_ID, wavesBalance.balance)}</p>
+                            <p>Total UFIC : {parseFormattedAssetNumber(uficBalance.assetId, uficBalance.balance)}</p> 
                         </div>
                     }
                 </div>
