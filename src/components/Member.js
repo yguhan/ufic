@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as Constants from '../constants/constants'
-import MemberList from './MemberList';
+import MemberInfoList from './MemberInfoList';
+import * as API from '../lib/api';
 
 class Member extends Component {
     constructor(props) {
@@ -20,8 +21,7 @@ class Member extends Component {
         this.setState({
             fetching: true,
         });
-        const uficHoldersMap = await this.props.waves.API.Node.v1.assets.distribution(Constants.UFIC_ASSET_ID);
-
+        const uficHoldersMap = await API.getAssetDistribution(Constants.UFIC_ASSET_ID);
         this.setState({
             uficHoldersMap: uficHoldersMap,
             fetching: false, // done
@@ -46,7 +46,7 @@ class Member extends Component {
                 <div className="tab-content">
                     <div id="total_member" className="tab-pane fade in active">
                         {!fetching &&
-                            <MemberList uficHoldersMap={uficHoldersMap} />
+                            <MemberInfoList uficHoldersMap={uficHoldersMap} />
                         }
                     </div>
                     <div id="acting_member" className="tab-pane fade">
@@ -54,13 +54,9 @@ class Member extends Component {
                     </div>
                 </div>
             </div>
-            <h1> </h1>
-            <pre>
-                UFIC Token Explorer v{Constants.UFICTOKENEXPLORER_VERSION}, created by <a href="http://steemit.com/@yguhan">@yguhan</a>
-            </pre>
         </div>
       );
-    }
+    }   
 }
 
 export default Member;
