@@ -2,34 +2,60 @@ import React, { Component } from 'react';
 import * as Constants from '../constants/constants'
 import MemberInfoList from './MemberInfoList';
 import * as API from '../lib/api';
+import moment from 'moment';
+import { parseShortenString, getAssetAmount } from '../lib/common';
 
 class Member extends Component {
     constructor(props) {
-      super(props);
-      this.state = {
-        uficHoldersMap: {},
-        fetching: true,
-      }
+        super(props);
+        this.state = {
+            fetching: true,
+        }
     }
 
     componentDidMount() {
-        this.getUficHoldersMap();
     }
 
-    getUficHoldersMap = async() => {
-        
+
         this.setState({
             fetching: true,
         });
-        const uficHoldersMap = await API.getAssetDistribution(Constants.UFIC_ASSET_ID);
-        this.setState({
-            uficHoldersMap: uficHoldersMap,
-            fetching: false, // done
+
+        const txs = await API.getTxs(Constants.UFIC_REGISTER_ADDRESS);
+
+        const memberInfoPromiseList = txs.map(async (tx) => {
+
+            // NOTE: #register 0 Admin 2018-1
+            // ['#register 0 Admin 2018-1', '0', 'Admin', ' 2018-1', '2018', '1']
+            const matches = tx.attachment.match(/^#register (\d) ([a-zA-Z가-힣]+)( (\d{4})-(\d))?/);
+            if (!matches) return ; 
+            
+            // month(3) -> 2
+            // 1~6(->0~5) -> 0 / 7~12(->6~11) -> 1
+            let isActing = moment().year == matches[4] && parseInt(moment().month()/6).toString() == matches();
+            isActing = isActing? '활동' : '비활동';
+
+            const balance = await API.getBalance(tx.sender, Constants.UFIC_ASSET_ID);
+            
+            return {
+                '기수': matches[1],
+                '이름': matches[2],
+                '주소': tx.sender,
+                '보유량': getAssetAmount(balance),
+                tx: tx.id,
+                '활동여부': isActing,
+            }
+
         });
+
+
+        this.setState({
+            fetching: false,
+        });
+
     }
 
     render() {
-        const {uficHoldersMap, fetching} = this.state;
 
         return (
         <div className="container">
@@ -46,7 +72,6 @@ class Member extends Component {
                 <div className="tab-content">
                     <div id="total_member" className="tab-pane fade in active">
                         {!fetching &&
-                            <MemberInfoList uficHoldersMap={uficHoldersMap} />
                         }
                     </div>
                     <div id="acting_member" className="tab-pane fade">
