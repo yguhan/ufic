@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as Constants from '../constants/constants'
 import Balance from './Balance';
 import TransactionInfo from './TransactionInfo';
-import _ from 'underscore';
+import _ from 'lodash';
 
 class TransactionList extends Component {
     constructor(props) {
@@ -20,7 +20,7 @@ class TransactionList extends Component {
                 <Balance />
                 
                 <div className="panel panel-default">
-                    <div className="panel-heading">거래일시 / 입금액 / 출금액 / 수수료 / 보낸 주소 / 받는 주소 / 메모 / tx </div>
+                    <div className="panel-heading">거래 내역</div>
                     <table className="table" style={{textAlign: 'left'}}>
                         <thead>
                         <tr>
