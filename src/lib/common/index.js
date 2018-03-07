@@ -27,3 +27,19 @@ export function getAssetAmount(money) {
     let numberOfCoins = parseInt(_.get(money, '_coins.c').join('')) / (10**_.get(money, 'asset.precision'));
     return `${numberOfCoins} ${_.get(money, 'asset.name')}`;
 }
+
+export function getAssetAmountById(amount, assetId) {
+    if (!amount) return 0;
+    
+    switch (assetId) {
+        case Constants.WAVES_ASSET_ID: {
+            return `${amount / 10**Constants.WAVES_ASSET_DECIMALS} Waves`;
+        }
+        case Constants.UFIC_ASSET_ID: {
+            return `${amount / 10**Constants.UFIC_ASSET_DECIMALS} UFIC`;
+        }
+        default: {
+            return `${amount}? Unknown`;
+        }
+    }
+}
