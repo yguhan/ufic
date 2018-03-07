@@ -15,8 +15,10 @@ class Member extends Component {
     }
 
     componentDidMount() {
+        this.getMemberInfoList();
     }
 
+    getMemberInfoList = async() => {
 
         this.setState({
             fetching: true,
