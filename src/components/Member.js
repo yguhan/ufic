@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as Constants from '../constants/constants'
 import MemberInfoList from './MemberInfoList';
+import TokenHolderList from './TokenHolderList';
 import * as API from '../lib/api';
 import moment from 'moment';
 import { parseShortenString, getAssetAmount } from '../lib/common';
@@ -9,19 +10,22 @@ class Member extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            fetching: true,
+            fetchingMemberInfoList: true,
+            fetchingTokenHolderMap: true,
             memberInfoList: [],
-        }
+            tokenHolderMap: {},
+        }   
     }
 
     componentDidMount() {
         this.getMemberInfoList();
+        this.getTokenHolderMap();
     }
 
     getMemberInfoList = async() => {
 
         this.setState({
-            fetching: true,
+            fetchingMemberInfoList: true,
         });
 
         const txs = await API.getTxs(Constants.UFIC_REGISTER_ADDRESS);
@@ -55,13 +59,27 @@ class Member extends Component {
 
         this.setState({
             memberInfoList: memberInfoList,
-            fetching: false,
+            fetchingMemberInfoList: false,
         });
 
     }
 
+    getTokenHolderMap = async() => {
+        
+        this.setState({
+            fetchingTokenHolderMap: true,
+        })
+
+        const tokenHolderMap = await API.getAssetDistribution(Constants.UFIC_ASSET_ID);
+
+        this.setState({
+            tokenHolderMap: tokenHolderMap,
+            fetchingTokenHolderMap: false,
+        })
+    }
+
     render() {
-        const { memberInfoList, fetching } = this.state;
+        const { memberInfoList, fetchingMemberInfoList, tokenHolderMap, fetchingTokenHolderMap } = this.state;
         const actingMemberInfoList = memberInfoList.filter((member) => member['활동여부'] == '활동');
 
         return (
@@ -75,16 +93,24 @@ class Member extends Component {
                     <li>
                         <a data-toggle="tab" href="#acting_member">활동 멤버</a>
                     </li>
+                    <li>
+                        <a data-toggle="tab" href="#token_holder">토큰 홀더</a>
+                    </li>
                 </ul>
                 <div className="tab-content">
                     <div id="total_member" className="tab-pane fade in active">
-                        {!fetching &&
+                        {!fetchingMemberInfoList &&
                             <MemberInfoList memberInfoList={memberInfoList} />
                         }
                     </div>
                     <div id="acting_member" className="tab-pane fade">
-                        {!fetching &&
+                        {!fetchingMemberInfoList &&
                             <MemberInfoList memberInfoList={actingMemberInfoList} />
+                        }
+                    </div>
+                    <div id="token_holder" className="tab-pane fade">
+                        {!fetchingTokenHolderMap &&
+                            <TokenHolderList tokenHolderMap={tokenHolderMap} />
                         }
                     </div>
                 </div>
