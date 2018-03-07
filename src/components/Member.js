@@ -62,6 +62,7 @@ class Member extends Component {
 
     render() {
         const { memberInfoList, fetching } = this.state;
+        const actingMemberInfoList = memberInfoList.filter((member) => member['활동여부'] == '활동');
 
         return (
         <div className="container">
@@ -82,7 +83,9 @@ class Member extends Component {
                         }
                     </div>
                     <div id="acting_member" className="tab-pane fade">
-                        {/* TODO: acting member */}
+                        {!fetching &&
+                            <MemberInfoList memberInfoList={actingMemberInfoList} />
+                        }
                     </div>
                 </div>
             </div>
