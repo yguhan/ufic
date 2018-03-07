@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as Constants from '../constants/constants'
 import TransactionList from './TransactionList';
 import * as API from '../lib/api';
-import _ from 'underscore';
+import _ from 'lodash';
 
 class Account extends Component {
     constructor(props) {
@@ -22,7 +22,7 @@ class Account extends Component {
         this.setState({
             fetching: true,
         });
-        let txList = await API.getTxs(Constants.UFIC_WALLET_ADDRESS);   
+        let txList = await API.getTxs(Constants.UFIC_WALLET_ADDRESS); 
 
         this.setState({
             txList: txList,
@@ -32,6 +32,8 @@ class Account extends Component {
 
     render() {
         const {txList, fetching} = this.state;
+        const depositTxList = txList.filter((tx) => tx.recipient === Constants.UFIC_WALLET_ADDRESS);
+        const withdrawalTxList = txList.filter((tx) => tx.sender === Constants.UFIC_WALLET_ADDRESS);
 
         return (
             <div className="container">
@@ -50,15 +52,19 @@ class Account extends Component {
                     </ul>
                     <div className="tab-content">
                         <div id="total_tx" className="tab-pane fade in active">
-                            {!fetching &&
+                            { !fetching &&
                                 <TransactionList txList={txList} />
                             }
                         </div>
                         <div id="deposit_tx" className="tab-pane fade">
-                            {/* TODO: deposit tx */}
+                            { !fetching && 
+                                <TransactionList txList={depositTxList} />
+                            }
                         </div>
                         <div id="withdrawal_tx" className="tab-pane fade">
-                            {/* TODO: withdrawal tx */}
+                            { !fetching && 
+                                <TransactionList txList={withdrawalTxList} />
+                            }
                         </div>
                     </div>
                 </div>
