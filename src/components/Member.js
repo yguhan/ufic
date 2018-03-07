@@ -10,6 +10,7 @@ class Member extends Component {
         super(props);
         this.state = {
             fetching: true,
+            memberInfoList: [],
         }
     }
 
@@ -48,14 +49,17 @@ class Member extends Component {
 
         });
 
+        const memberInfoList = await Promise.all(memberInfoPromiseList);
 
         this.setState({
+            memberInfoList: memberInfoList,
             fetching: false,
         });
 
     }
 
     render() {
+        const { memberInfoList, fetching } = this.state;
 
         return (
         <div className="container">
@@ -72,6 +76,7 @@ class Member extends Component {
                 <div className="tab-content">
                     <div id="total_member" className="tab-pane fade in active">
                         {!fetching &&
+                            <MemberInfoList memberInfoList={memberInfoList} />
                         }
                     </div>
                     <div id="acting_member" className="tab-pane fade">
