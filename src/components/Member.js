@@ -35,7 +35,7 @@ class Member extends Component {
             
             // month(3) -> 2
             // 1~6(->0~5) -> 0 / 7~12(->6~11) -> 1
-            let isActing = moment().year == matches[4] && parseInt(moment().month()/6).toString() == matches();
+            let isActing = moment().year() == matches[4] && (parseInt(moment().month()/6) + 1).toString() == matches[5];
             isActing = isActing? '활동' : '비활동';
 
             const balance = await API.getBalance(tx.sender, Constants.UFIC_ASSET_ID);
