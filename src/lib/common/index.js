@@ -24,11 +24,22 @@ export function getAssetAmount(money) {
 
     // NOTE: used in v2
     // big number to int -> int num / precision
-    let numberOfCoins = parseInt(_.get(money, '_coins.c').join('')) / (10**_.get(money, 'asset.precision'));
+    const numberOfCoins = parseInt(_.get(money, '_coins.c').join('')) / (10**_.get(money, 'asset.precision'));
+    return numberOfCoins;
+
+}
+
+export function getAssetAmountWithName(money) {
+    if (!money) return 0;
+
+    // NOTE: used in v2
+    // big number to int -> int num / precision
+    // let numberOfCoins = parseInt(_.get(money, '_coins.c').join('')) / (10**_.get(money, 'asset.precision'));
+    const numberOfCoins = getAssetAmount(money);
     return `${numberOfCoins} ${_.get(money, 'asset.name')}`;
 }
 
-export function getAssetAmountById(amount, assetId) {
+export function getAssetAmountWithNameById(amount, assetId) {
     if (!amount) return 0;
     
     switch (assetId) {
