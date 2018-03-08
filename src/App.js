@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Member from './components/Member';
 import Account from './components/Account';
+import Vote from './components/Vote';
 
 class App extends Component {
   constructor(props) {
@@ -29,13 +30,13 @@ class App extends Component {
               </ul>
               <div class="tab-content">
                   <div class="tab-pane active" id="dongari_member">
-                          <Member />
+                        <Member />
                   </div>
                   <div class="tab-pane" id="dongari_account">
-                          <Account />
+                        <Account />
                   </div>
                   <div class="tab-pane" id="vote">
-                          {/* TODO: <Vote/> */}
+                        <Vote/>
                   </div>
               </div>
           </div>
