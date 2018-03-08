@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as Constants from '../constants/constants'
 import * as API from '../lib/api';
 import _ from 'lodash';
-import { parseShortenString, getAssetAmountById } from '../lib/common';
+import { parseShortenString, getAssetAmountWithNameById } from '../lib/common';
 
 class TokenHolderList extends Component {
     constructor(props) {
@@ -10,11 +10,10 @@ class TokenHolderList extends Component {
     }
 
     render() {
-        console.log(this.props.tokenHolderMap);
 
         return (
             <div className="container" style={{maxWidth: 1000}}>
-               
+                <div><h1></h1></div>
                 <div className="panel panel-default">
                     <div className="panel-heading">토큰 홀더 정보</div>
                     <table className="table" style={{textAlign: 'left'}}>
@@ -29,7 +28,7 @@ class TokenHolderList extends Component {
                                 return (
                                 <tr key={i}>
                                     <td><a href={`${Constants.WAVESEXPLORER_URI}/address/${address}`}>{ parseShortenString(address) }</a></td>
-                                    <td>{getAssetAmountById(this.props.tokenHolderMap[address], Constants.UFIC_ASSET_ID)}</td>
+                                    <td>{getAssetAmountWithNameById(this.props.tokenHolderMap[address], Constants.UFIC_ASSET_ID)}</td>
                                 </tr>
                                 );
                             })
