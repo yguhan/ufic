@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as Constants from '../constants/constants';
 import * as API from '../lib/api';
 import _ from 'lodash';
-import { getAssetAmount } from '../lib/common';
+import { getAssetAmountWithName } from '../lib/common';
 
 class Balance extends Component {
     constructor(props) {
@@ -42,7 +42,7 @@ class Balance extends Component {
                     
                     {!fetching &&
                         balances.map((balance) => {
-                            return <p>Total {_.get(balance, 'asset.name')} : {getAssetAmount(balance)} </p>
+                            return <p>Total {_.get(balance, 'asset.name')} : {getAssetAmountWithName(balance)} </p>
                         }) 
                     }
                 </div>
