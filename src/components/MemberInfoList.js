@@ -12,7 +12,7 @@ class MemberInfoList extends Component {
     render() {
         return (
             <div className="container" style={{maxWidth: 1000}}>
-               
+                <div><h1></h1></div>
                 <div className="panel panel-default">
                     <div className="panel-heading">동아리원 정보</div>
                     <table className="table" style={{textAlign: 'left'}}>
