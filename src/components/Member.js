@@ -4,7 +4,7 @@ import MemberInfoList from './MemberInfoList';
 import TokenHolderList from './TokenHolderList';
 import * as API from '../lib/api';
 import moment from 'moment';
-import { parseShortenString, getAssetAmount } from '../lib/common';
+import { parseShortenString, getAssetAmountWithName } from '../lib/common';
 
 class Member extends Component {
     constructor(props) {
@@ -48,7 +48,7 @@ class Member extends Component {
                 '기수': matches[1],
                 '이름': matches[2],
                 '주소': tx.sender,
-                '보유량': getAssetAmount(balance),
+                '보유량': getAssetAmountWithName(balance),
                 tx: tx.id,
                 '활동여부': isActing,
             }
@@ -96,8 +96,12 @@ class Member extends Component {
                     <li>
                         <a data-toggle="tab" href="#token_holder">토큰 홀더</a>
                     </li>
+                    <li>
+                        <a data-toggle="tab" href="#register_process">등록 방법</a>
+                    </li>
                 </ul>
                 <div className="tab-content">
+                    <h5>@등록 지갑 주소: <a href={`https://wavesexplorer.com/address/${Constants.UFIC_REGISTER_ADDRESS}`}>{Constants.UFIC_REGISTER_ADDRESS}</a></h5>
                     <div id="total_member" className="tab-pane fade in active">
                         {!fetchingMemberInfoList &&
                             <MemberInfoList memberInfoList={memberInfoList} />
@@ -112,6 +116,16 @@ class Member extends Component {
                         {!fetchingTokenHolderMap &&
                             <TokenHolderList tokenHolderMap={tokenHolderMap} />
                         }
+                    </div>
+                    <div id="register_process" className="tab-pane fade">
+                        <div className="alert alert-success" role="alert">                            
+                            <p>등록 지갑 주소에 아래 메시지와 함께 1 UFIC을 전송</p>
+                            <p>#register [기수] [이름] [년도-학기]</p>
+                            <br/>
+                            <p>예시)</p>
+                            <p>활동 멤버: #register 10 홍길동 2018-1</p>
+                            <p>비활동 멤버: #register 5 홍길순</p>
+                        </div>
                     </div>
                 </div>
             </div>
