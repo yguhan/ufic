@@ -4,6 +4,7 @@ import './App.css';
 import Member from './components/Member';
 import Account from './components/Account';
 import Vote from './components/Vote';
+import Introduction from './components/Introduction';
 
 class App extends Component {
   constructor(props) {
@@ -12,34 +13,40 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-          <div class="ufic_title_div">
-              <span class="ufic_title_span">UFIC Explorer</span>
-          </div>
-          <div class="tabbable tabs-left" style={{width: '100%'}}>
-              <ul class="nav nav-tabs">
-                  <li class="active">
-                      <a href="#dongari_member" data-toggle="tab">동아리원</a>
-                  </li>
-                  <li>
-                      <a href="#dongari_account" data-toggle="tab">동아리 계좌</a>
-                  </li>
-                  <li>
-                      <a href="#vote" data-toggle="tab">투표</a>
-                  </li>
-              </ul>
-              <div class="tab-content">
-                  <div class="tab-pane active" id="dongari_member">
+        <div className="App">
+            <div class="ufic_title_div">
+                <span class="ufic_title_span">UFIC Explorer</span>
+            </div>
+            <div class="tabbable tabs-left" style={{width: '100%'}}>
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#dongari_member" data-toggle="tab">동아리원</a>
+                    </li>
+                    <li>
+                        <a href="#dongari_account" data-toggle="tab">동아리 계좌</a>
+                    </li>
+                    <li>
+                        <a href="#vote" data-toggle="tab">투표</a>
+                    </li>
+                    <li>
+                        <a href="#introduction" data-toggle="tab">소개</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="dongari_member">
                         <Member />
-                  </div>
-                  <div class="tab-pane" id="dongari_account">
+                    </div>
+                    <div class="tab-pane" id="dongari_account">
                         <Account />
-                  </div>
-                  <div class="tab-pane" id="vote">
-                        <Vote/>
-                  </div>
-              </div>
-          </div>
+                    </div>
+                    <div class="tab-pane" id="vote">
+                        <Vote />
+                    </div>
+                    <div class="tab-pane" id="introduction">
+                        <Introduction />
+                    </div>
+                </div>
+            </div>
       
           {/* <div class="modal fade" id="pleaseWaitDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  data-backdrop="static" data-keyboard="false">
               <div class="modal-dialog">
@@ -68,12 +75,12 @@ class App extends Component {
                   </div>
               </div>
           </div> */}
-          <footer class="footer">
-              <div class="container">
-                  <span class="text-muted">UFIC Explorer | created by <a href="http://steemit.com/@yguhan">@yguhan</a></span>
-              </div>
-          </footer>      
-      </div>
+            <footer class="footer">
+                <div class="container">
+                    <span class="text-muted">UFIC Explorer | created by <a href="http://steemit.com/@yguhan">@yguhan</a></span>
+                </div>
+            </footer>      
+        </div>
     );
   }
 }
