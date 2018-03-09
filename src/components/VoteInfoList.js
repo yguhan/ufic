@@ -26,6 +26,7 @@ class VoteInfoList extends Component {
     getChoiceToVoteResultMap(votes) {
         // #vote A32m 2
 
+        // Small number , ... , big number
         votes.sort((prevVote, currentVote) => {
             return prevVote.attachment > currentVote.attachment;
         });
