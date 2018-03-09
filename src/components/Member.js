@@ -59,6 +59,8 @@ class Member extends Component {
         let memberInfoList = await Promise.all(memberInfoPromiseList);
         
         memberInfoList = memberInfoList.filter((info) => info);
+        // NOTE: Remove dupulicated info from same tx.sender
+        memberInfoList = _.uniqBy(memberInfoList, '주소');
         memberInfoList.sort((prevMemberInfo, currentMemberInfo) => _.get(prevMemberInfo, '기수') < _.get(currentMemberInfo, '기수'));
 
         // NOTE: Renew Case
