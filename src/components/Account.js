@@ -51,6 +51,8 @@ class Account extends Component {
                         </li>
                     </ul>
                     <div className="tab-content">
+
+                        <h5>@동아리 지갑 주소: <a href={`https://wavesexplorer.com/address/${Constants.UFIC_WALLET_ADDRESS}`}>{Constants.UFIC_WALLET_ADDRESS}</a></h5>
                         <div id="total_tx" className="tab-pane fade in active">
                             { !fetching &&
                                 <TransactionList txList={txList} />
