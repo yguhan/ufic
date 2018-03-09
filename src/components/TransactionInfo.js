@@ -6,7 +6,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import 'moment/locale/ko';
 
-// TO: korean timezone
+// korean timezone
 moment.locale('ko');
 
 class TransactionInfo extends Component {
@@ -22,7 +22,6 @@ class TransactionInfo extends Component {
 
         return (        
             // 거래일시 / 입금액 / 출금액 / 수수료 / 보낸 주소 / 받는 주소 / 메모 / tx         
-            // TODO: 종류 없애고 1000 UFIC, 0.1 WAVES 형태로
             <tr>
                 <td>{moment(tx.timestamp).format('YYYY/MM/DD hh:mm:ss')}</td>
                 <td>{tx.recipient == Constants.UFIC_WALLET_ADDRESS ? getAssetAmountWithName(tx.amount) : 0}</td>
