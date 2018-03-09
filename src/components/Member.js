@@ -5,6 +5,7 @@ import TokenHolderList from './TokenHolderList';
 import * as API from '../lib/api';
 import moment from 'moment';
 import { parseShortenString, getAssetAmountWithName } from '../lib/common';
+import _ from 'lodash';
 
 class Member extends Component {
     constructor(props) {
@@ -56,7 +57,41 @@ class Member extends Component {
         });
 
         let memberInfoList = await Promise.all(memberInfoPromiseList);
-        memberInfoList.sort((prevMemberInfo, currentMemberInfo) => prevMemberInfo.기수 < currentMemberInfo.기수);
+        
+        memberInfoList = memberInfoList.filter((info) => info);
+        memberInfoList.sort((prevMemberInfo, currentMemberInfo) => _.get(prevMemberInfo, '기수') < _.get(currentMemberInfo, '기수'));
+
+        // NOTE: Renew Case
+        let renewMemberInfoPromiseList = txs.map(async (tx) => {
+
+            // NOTE: #renew 2018-2
+            // ['#renew 2018-2', '2018', '2']
+            const matches = tx.attachment.match(/^#renew (\d{4})-(\d)/);
+            if (!matches) return ; 
+            
+            // month(3) -> 2
+            // 1~6(->0~5) -> 0 / 7~12(->6~11) -> 1
+            let isActing = moment().year() == matches[1] && (parseInt(moment().month()/6) + 1).toString() == matches[2];
+            isActing = isActing? '활동' : '비활동';
+            
+            return {
+                '주소': tx.sender,
+                '활동여부': isActing,
+            }
+
+        });
+
+        let renewMemberInfoList = await Promise.all(renewMemberInfoPromiseList);
+        renewMemberInfoList = renewMemberInfoList.filter((info) => _.get(info, '활동여부') === '활동');
+
+        // Apply renew member info
+        memberInfoList = memberInfoList.map((info) => {
+            const matchingInfo = _.find(renewMemberInfoList, (renewMemberInfo) => _.get(renewMemberInfo, '주소') === _.get(info, '주소'));
+            if (!matchingInfo) return info;
+
+            info.활동여부 = '활동';
+            return info;
+        });
 
         this.setState({
             memberInfoList: memberInfoList,
