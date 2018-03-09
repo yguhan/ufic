@@ -49,8 +49,8 @@ class Member extends Component {
                 '이름': matches[2],
                 '주소': tx.sender,
                 '보유량': getAssetAmountWithName(balance),
-                tx: tx.id,
                 '활동여부': isActing,
+                tx: tx.id,
             }
 
         });
