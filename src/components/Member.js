@@ -135,6 +135,9 @@ class Member extends Component {
                     <li>
                         <a data-toggle="tab" href="#register_process">등록 방법</a>
                     </li>
+                    <li>
+                        <a data-toggle="tab" href="#renew_process">갱신 방법</a>
+                    </li>
                 </ul>
                 <div className="tab-content">
                     <h5>@등록 지갑 주소: <a href={`https://wavesexplorer.com/address/${Constants.UFIC_REGISTER_ADDRESS}`}>{Constants.UFIC_REGISTER_ADDRESS}</a></h5>
@@ -161,8 +164,23 @@ class Member extends Component {
                             <p>예시)</p>
                             <p>활동 멤버: #register 10 홍길동 2018-1</p>
                             <p>비활동 멤버: #register 5 홍길순</p>
+                            <br/>
+                            <p>*** 1학기 1월~6월 /2학기 7월~12월</p>
                         </div>
                     </div>
+                    <div id="renew_process" className="tab-pane fade">
+                        <div className="alert alert-success" role="alert">
+                            <p>기존 기수 멤버가 다음 학기 활동을 계속할 경우</p>                            
+                            <p>등록 지갑 주소에 아래 메시지와 함께 1 UFIC을 전송</p>
+                            <p>#renew [년도-학기]</p>
+                            <br/>
+                            <p>예시)</p>
+                            <p>#renew 2018-2</p>
+                            <br/>
+                            <p>*** 1학기 1월~6월 /2학기 7월~12월</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
