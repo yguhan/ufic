@@ -37,7 +37,6 @@ class Balance extends Component {
 
         return (
             <div>
-                <h5>@동아리 지갑 주소: <a href={`https://wavesexplorer.com/address/${Constants.UFIC_WALLET_ADDRESS}`}>{Constants.UFIC_WALLET_ADDRESS}</a></h5>
                 <div className="alert alert-success" role="alert">
                     
                     {!fetching &&
