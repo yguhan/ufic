@@ -25,6 +25,11 @@ class VoteInfoList extends Component {
 
     getChoiceToVoteResultMap(votes) {
         // #vote A32m 2
+
+        votes.sort((prevVote, currentVote) => {
+            return prevVote.attachment > currentVote.attachment;
+        });
+
         const choiceToVoteResultMap = _.reduce(votes, (map, vote) => {
   
             const matches = vote.attachment.match(/^#vote \w{4} (\d)$/);
