@@ -77,13 +77,10 @@ class Vote extends Component {
                             <a data-toggle="tab" href="#total_vote">전체 투표 내역</a>
                         </li>
                         <li>
-                            <a data-toggle="tab" href="#recent_vote">최근 투표 내역</a>
+                            <a data-toggle="tab" href="#survey_process">생성 방법</a>
                         </li>
                         <li>
-                            <a data-toggle="tab" href="#survey_process">투표 생성 방법</a>
-                        </li>
-                        <li>
-                            <a data-toggle="tab" href="#vote_process">투표 참여 방법</a>
+                            <a data-toggle="tab" href="#vote_process">참여 방법</a>
                         </li>
                         
                     </ul>
@@ -93,9 +90,6 @@ class Vote extends Component {
                             { !fetching &&
                                 <VoteInfoList txToVoteMap={txToVoteMap} />
                             }
-                        </div>
-                        <div id="recent_vote" className="tab-pane fade">
-                            {/* TODO: recent_vote */}
                         </div>
                         <div id="survey_process" className="tab-pane fade">
                             <div className="alert alert-success" role="alert">
