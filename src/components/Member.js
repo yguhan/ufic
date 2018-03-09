@@ -55,7 +55,8 @@ class Member extends Component {
 
         });
 
-        const memberInfoList = await Promise.all(memberInfoPromiseList);
+        let memberInfoList = await Promise.all(memberInfoPromiseList);
+        memberInfoList.sort((prevMemberInfo, currentMemberInfo) => prevMemberInfo.기수 < currentMemberInfo.기수);
 
         this.setState({
             memberInfoList: memberInfoList,
