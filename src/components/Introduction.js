@@ -58,24 +58,6 @@ class Introduction extends Component {
                             </div>
                         </div>    
                         
-                        {/* <h5>@투표 지갑 주소: <a href={`https://wavesexplorer.com/address/${Constants.UFIC_VOTE_ADDRESS}`}>{Constants.UFIC_VOTE_ADDRESS}</a></h5>
-                        <div id="total_vote" className="tab-pane fade in active">
-                            { !fetching &&
-                                <VoteInfoList txToVoteMap={txToVoteMap} />
-                            }
-                        </div>
-                        <div id="recent_vote" className="tab-pane fade">
-                          
-                        </div>
-                        <div id="vote_process" className="tab-pane fade">
-                            <div className="alert alert-success" role="alert">
-                                <p>투표 지갑 주소에 아래 메시지와 함께 1 UFIC을 전송</p>
-                                <p>#survey '질문' '선택사항1/선택사항2/선택사항3'</p>
-                                <br/>
-                                <p>예시)</p>
-                                <p>#survey '이번 주 모임 저녁 메뉴' '치킨/피자'</p>
-                            </div>
-                        </div> */}
                     </div>
                 </div>
             </div>
