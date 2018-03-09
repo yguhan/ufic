@@ -80,7 +80,10 @@ class Vote extends Component {
                             <a data-toggle="tab" href="#recent_vote">최근 투표 내역</a>
                         </li>
                         <li>
-                            <a data-toggle="tab" href="#vote_process">투표 생성 방법</a>
+                            <a data-toggle="tab" href="#survey_process">투표 생성 방법</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#vote_process">투표 참여 방법</a>
                         </li>
                         
                     </ul>
@@ -94,13 +97,28 @@ class Vote extends Component {
                         <div id="recent_vote" className="tab-pane fade">
                             {/* TODO: recent_vote */}
                         </div>
-                        <div id="vote_process" className="tab-pane fade">
+                        <div id="survey_process" className="tab-pane fade">
                             <div className="alert alert-success" role="alert">
                                 <p>투표 지갑 주소에 아래 메시지와 함께 1 UFIC을 전송</p>
                                 <p>#survey '질문' '선택사항1/선택사항2/선택사항3'</p>
                                 <br/>
                                 <p>예시)</p>
                                 <p>#survey '이번 주 모임 저녁 메뉴' '치킨/피자'</p>
+                            </div>
+                        </div>
+                        <div id="vote_process" className="tab-pane fade">
+                            <div className="alert alert-success" role="alert">
+                                <p>투표 지갑 주소에 아래 메시지와 함께 N개의 UFIC을 전송</p>
+                                <p>#vote [tx_id 앞의 4글자] [선택번호]</p>
+                                <br/>
+                                <p>예시)</p>
+                                <p>내일 점심 메뉴?? 1. 피자 2. 파스타</p>
+                                <p>tx: Fb7X ...</p>
+                                <p>#vote Fb7X 1</p>
+                                <br/>
+                                <p>결과</p>
+                                <p>UFIC 개수가 많이 모인 번호로 결정</p>
+                                <p>(중복 투표 가능 + 개수 제한 없음)</p>
                             </div>
                         </div>
                     </div>
