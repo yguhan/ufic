@@ -17,7 +17,7 @@ class Introduction extends Component {
                             <a data-toggle="tab" href="#ufic_explorer">UFIC Explorer</a>
                         </li>
                         <li>
-                            <a data-toggle="tab" href="#dev_team">개발 팀</a>
+                            <a data-toggle="tab" href="#ufic_explorer_team">팀</a>
                         </li>
                         
                     </ul>
@@ -41,7 +41,7 @@ class Introduction extends Component {
 
                         </div>
 
-                        <div id="dev_team" className="tab-pane fade">
+                        <div id="ufic_explorer_team" className="tab-pane fade">
                         
                             <div className="alert alert-success" role="alert">
                                 <p>팀장</p>
@@ -52,6 +52,7 @@ class Introduction extends Component {
                                 <p>개발: .</p>
                                 <p>기획: . </p>
                                 <p>디자인: .</p>
+                                <p>운영: .</p>
                                 <br />
                                 
                                 <p>UFIC Explorer는 <a href="https://github.com/yguhan/ufic-app">깃허브</a>에서 오픈 소스로 관리됩니다.</p>
