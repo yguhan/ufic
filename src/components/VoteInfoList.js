@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import * as Constants from '../constants/constants'
 import _ from 'lodash';
 import { parseShortenString, getAssetAmount } from '../lib/common';
+import moment from 'moment';
+import 'moment/locale/ko';
+
+// korean timezone
+moment.locale('ko');
+
 
 class VoteInfoList extends Component {
     constructor(props) {
@@ -25,7 +31,6 @@ class VoteInfoList extends Component {
 
     getChoiceToVoteResultMap(votes) {
         // #vote A32m 2
-
         // Small number , ... , big number
         votes.sort((prevVote, currentVote) => {
             return prevVote.attachment > currentVote.attachment;
@@ -42,11 +47,11 @@ class VoteInfoList extends Component {
             if (!map[choice]) {
                 _.set(map, choice, {
                     'amount': amount,
-                    'txList': [vote.id],
+                    'txIds': [vote.id],
                 });
             } else {
                 map[choice].amount += amount;
-                map[choice].txList.push(vote.id);
+                map[choice].txIds.push(vote.id);
             }
 
             return map;
@@ -65,19 +70,31 @@ class VoteInfoList extends Component {
                 {_.keys(txToVoteMap).map((tx, i) => {
 
                     const choiceToVoteResultMap = this.getChoiceToVoteResultMap(txToVoteMap[tx].votes);
-
+                    
                     return (
                         <div className="alert alert-success" role="alert">
                             
-                            <p>tx: <a href={`https://wavesexplorer.com/tx/${txToVoteMap[tx].survey.id}`}>{ parseShortenString(txToVoteMap[tx].survey.id) }</a></p>
                             <p>{this.getSurveyText(txToVoteMap[tx].survey.attachment)}</p>
-                            <p>투표 방법: #vote {tx.slice(0,4)} 선택번호</p>
+                            <p>투표 방법: #vote {txToVoteMap[tx].survey.id.slice(0,4)} 선택번호</p>
+                            <p>생성일시: {moment(txToVoteMap[tx].survey.timestamp).format('YYYY/MM/DD hh:mm:ss')}</p>
+                            <p>tx: <a href={`https://wavesexplorer.com/tx/${txToVoteMap[tx].survey.id}`}>{ parseShortenString(txToVoteMap[tx].survey.id) }</a></p>
                             <br/>
                             <p>투표 결과: </p>
                             {_.keys(choiceToVoteResultMap).map((choice, i) => {
                                 return (
-                                <p>{choice}. {choiceToVoteResultMap[choice].amount}</p>
+                                    <p>{choice}번: {choiceToVoteResultMap[choice].amount} UFIC</p>
                                 );
+                            })}
+                            {_.keys(choiceToVoteResultMap).map((choice, i) => {
+                                return (
+                                    <p>{choice}번 tx: 
+                                    {choiceToVoteResultMap[choice].txIds.map((txId) => {
+                                        return (
+                                            <a href={`${Constants.WAVESEXPLORER_URI}/tx/${txId}`}> {parseShortenString(txId)}</a>
+                                        );
+                                    })}
+                                    </p>
+                                )
                             })}
                             
                         </div>
