@@ -19,8 +19,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# ufic
-node_modules
-build/
-sftp.json
