@@ -35,7 +35,7 @@ class Member extends Component {
 
             // NOTE: #register 0 Admin 2018-1
             // ['#register 0 Admin 2018-1', '0', 'Admin', ' 2018-1', '2018', '1']
-            const matches = tx.attachment.match(/^#register (\d) ([a-zA-Z가-힣]+)( (\d{4})-(\d))?/);
+            const matches = tx.attachment.match(/^#register (\d+) ([a-zA-Z가-힣]+)( (\d{4})-(\d))?/);
             if (!matches) return ; 
             
             // month(3) -> 2
@@ -61,7 +61,7 @@ class Member extends Component {
         memberInfoList = memberInfoList.filter((info) => info);
         // NOTE: Remove dupulicated info from same tx.sender
         memberInfoList = _.uniqBy(memberInfoList, '주소');
-        memberInfoList.sort((prevMemberInfo, currentMemberInfo) => _.get(prevMemberInfo, '기수') < _.get(currentMemberInfo, '기수'));
+        memberInfoList.sort((prevMemberInfo, currentMemberInfo) => parseInt(_.get(prevMemberInfo, '기수')) < parseInt(_.get(currentMemberInfo, '기수')));
 
         // NOTE: Renew Case
         let renewMemberInfoPromiseList = txs.map(async (tx) => {
