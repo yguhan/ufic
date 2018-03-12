@@ -167,7 +167,7 @@ class Member extends Component {
                             <p>활동 멤버: #register 10 홍길동 2018-1</p>
                             <p>비활동 멤버: #register 5 홍길순</p>
                             <br/>
-                            <p>*** 1학기 1월~6월 /2학기 7월~12월</p>
+                            <p>* 1학기 1월~6월 /2학기 7월~12월</p>
                         </div>
                     </div>
                     <div id="renew_process" className="tab-pane fade">
@@ -179,7 +179,7 @@ class Member extends Component {
                             <p>예시)</p>
                             <p>#renew 2018-2</p>
                             <br/>
-                            <p>*** 1학기 1월~6월 /2학기 7월~12월</p>
+                            <p>* 1학기 1월~6월 /2학기 7월~12월</p>
                         </div>
                     </div>
 
