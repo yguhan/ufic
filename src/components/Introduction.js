@@ -28,10 +28,11 @@ class Introduction extends Component {
                             <div className="alert alert-success" role="alert">
                                 <p>UFIC Explorer는 <a href="http://wavesplatform.com">Waves</a> 기반 토큰 UFIC의 탐색기입니다.</p>
                                 <br/>
-                                {/* TODO: inserting ufic logo */}
-                                {/* <img class="ufic_logo" src={'ufic_logo_v1.png'} />
+
+                                <img class="ufic_logo" src={Constants.UFIC_LOGO_PATH} />
                                 <br/>
-                                <br/> */}
+                                <br/>
+                                
                                 <p>UFIC 토큰은 주식/암호화폐 연합 동아리 <a href="http://cafe.naver.com/ufic">UFIC</a>에서 동아리 운영 지원을 목적으로 발행된 토큰입니다.</p>
                                 <p>UFIC 토큰을 이용해 동아리원 명부, 동아리 계좌의 입출금 내역, 투표 등 다양한 활동을 Waves 블록체인 위에 기록할 수 있습니다.</p>
                                 <p>UFIC 토큰에 대한 자세한 정보는 <a href="https://wavesexplorer.com/tx/E63d9G5CTmyABNL3ztM72zi5c7PcM1PRtnR3bL9LCTCX">이곳</a>에서 확인할 수 있습니다.</p>

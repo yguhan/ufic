@@ -10,3 +10,5 @@ export const WAVESEXPLORER_URI = 'https://wavesexplorer.com';
 
 export const UFIC_REGISTER_ADDRESS = '3P7emxzmXoFk72ZMBx63Gu1QrCoSinFGksf';
 export const UFIC_VOTE_ADDRESS = '3PJE1GFtRfnoefmMHHuXT5QiR4akdbNPaGZ';
+
+export const UFIC_LOGO_PATH = 'ufic_logo_v3.png';
