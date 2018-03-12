@@ -77,7 +77,7 @@ class App extends Component {
           </div> */}
             <footer class="footer">
                 <div class="container">
-                    <span class="text-muted">UFIC Explorer | created by <a href="http://steemit.com/@yguhan">@yguhan</a></span>
+                    <span class="text-muted">UFIC Explorer | operated by <a href="http://cafe.naver.com/ufic">주식/암호화폐 연합 투자동아리 UFIC</a></span>
                 </div>
             </footer>      
         </div>
