@@ -28,6 +28,10 @@ class Introduction extends Component {
                             <div className="alert alert-success" role="alert">
                                 <p>UFIC Explorer는 <a href="http://wavesplatform.com">Waves</a> 기반 토큰 UFIC의 탐색기입니다.</p>
                                 <br/>
+                                {/* TODO: inserting ufic logo */}
+                                {/* <img class="ufic_logo" src={'ufic_logo_v1.png'} />
+                                <br/>
+                                <br/> */}
                                 <p>UFIC 토큰은 주식/암호화폐 연합 동아리 <a href="http://cafe.naver.com/ufic">UFIC</a>에서 동아리 운영 지원을 목적으로 발행된 토큰입니다.</p>
                                 <p>UFIC 토큰을 이용해 동아리원 명부, 동아리 계좌의 입출금 내역, 투표 등 다양한 활동을 Waves 블록체인 위에 기록할 수 있습니다.</p>
                                 <p>UFIC 토큰에 대한 자세한 정보는 <a href="https://wavesexplorer.com/tx/E63d9G5CTmyABNL3ztM72zi5c7PcM1PRtnR3bL9LCTCX">이곳</a>에서 확인할 수 있습니다.</p>
@@ -45,19 +49,21 @@ class Introduction extends Component {
                         <div id="ufic_explorer_team" className="tab-pane fade">
                         
                             <div className="alert alert-success" role="alert">
-                                <p>팀장</p>
-                                <p>8기 한윤구 / contact: <a href="https://github.com/yguhan">@github</a> <a href="https://gitlab.com/yguhan">@gitlab</a> <a href="http://steemit.com/@yguhan">@steemit</a></p>
+                                <p>개발</p>
+                                <p>팀장: 8기 한윤구</p>
                                 <br/>
                                 
-                                <p>팀원</p>
-                                <p>개발: .</p>
-                                <p>기획: . </p>
-                                <p>디자인: .</p>
-                                <p>운영: .</p>
+                                <p>기획</p>
+                                <p>팀장: 9기 오영은</p>
+                                <p>팀원: 7기 나혜림, 10기 문수인, 6기 오형석, 10기 김현지</p>
+                                <br/>
+
+                                <p>운영</p>
+                                <p>팀장: 7기 이범희</p>
+                                <p>팀원: 10기 전가영</p>
                                 <br />
                             </div>
                         </div>    
-                        
                     </div>
                 </div>
             </div>
