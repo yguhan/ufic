@@ -19,11 +19,11 @@ class Member extends Component {
     }
 
     componentDidMount() {
-        this.getMemberInfoList();
-        this.getTokenHolderMap();
+        this.setMemberInfoList();
+        this.setTokenHolderMap();
     }
 
-    getMemberInfoList = async() => {
+    setMemberInfoList = async() => {
 
         this.setState({
             fetchingMemberInfoList: true,
@@ -102,7 +102,7 @@ class Member extends Component {
 
     }
 
-    getTokenHolderMap = async() => {
+    setTokenHolderMap = async() => {
         
         this.setState({
             fetchingTokenHolderMap: true,
@@ -116,9 +116,62 @@ class Member extends Component {
         })
     }
 
+    getMemberRankInfo = (memberInfoList) => {
+        
+        const getAmount = (memberInfo) => {
+            
+            const matches = _.get(memberInfo, '보유량').match(/^(\d+) UFIC$/);
+            if (!matches) return 0;
+
+            return matches[1];
+        };
+
+        const sortedMemberInfoList = _.sortBy(memberInfoList, [(memberInfo) => {
+    
+            return parseInt(getAmount(memberInfo));
+    
+        }])
+        .reverse();
+
+        let memberRankInfoList = sortedMemberInfoList.reduce((memberRankInfoList, memberInfo, i) => {
+
+            let rank;
+
+            if (!i) {
+                rank = 1;
+            } else {
+                if (memberRankInfoList[i-1].보유량 == memberInfo.보유량) {
+                    rank = memberRankInfoList[i-1].순위;
+                } else {
+                    rank = memberRankInfoList[i-1].순위 + 1;
+                }
+            }
+             
+            memberRankInfoList.push(_.assign({
+                '순위': rank,
+            }, _.pick(memberInfo, ['기수', '이름', '주소', '보유량'])));
+
+            return memberRankInfoList;
+            
+        }, []);
+
+        // Decoration
+        memberRankInfoList = memberRankInfoList.map((memberInfo) => {
+            if (memberInfo.순위 > 3) return memberInfo;
+
+            memberInfo.순위 += ' ' + '★'.repeat(4 -memberInfo.순위);
+        
+            return memberInfo;
+        })
+        
+        return memberRankInfoList;
+
+    }
+
     render() {
         const { memberInfoList, fetchingMemberInfoList, tokenHolderMap, fetchingTokenHolderMap } = this.state;
         const actingMemberInfoList = memberInfoList.filter((member) => member['활동여부'] == '활동');
+        const memberRankInfoList = this.getMemberRankInfo(actingMemberInfoList);
 
         return (
         <div className="container">
@@ -130,6 +183,9 @@ class Member extends Component {
                     </li>
                     <li>
                         <a data-toggle="tab" href="#acting_member">활동 멤버</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#member_rank">랭킹</a>
                     </li>
                     <li>
                         <a data-toggle="tab" href="#token_holder">토큰 홀더</a>
@@ -151,6 +207,11 @@ class Member extends Component {
                     <div id="acting_member" className="tab-pane fade">
                         {!fetchingMemberInfoList &&
                             <MemberInfoList memberInfoList={actingMemberInfoList} />
+                        }
+                    </div>
+                    <div id="member_rank" className="tab-pane fade">
+                        {!fetchingMemberInfoList &&
+                            <MemberInfoList memberInfoList={memberRankInfoList} />
                         }
                     </div>
                     <div id="token_holder" className="tab-pane fade">
