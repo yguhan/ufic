@@ -8,6 +8,11 @@ export function getTxs(address) {
     return Waves.API.Node.v2.addresses.transactions(address);
 }
 
+export function getV1Txs(address) {
+    // NOTE: In v2 error occurs: Access-Control-Allow-Origin multiple domain in orderbook type tx
+    return Waves.API.Node.v1.transactions.getList(address);
+}
+
 export function getBalances(address) {
     return Waves.API.Node.v2.addresses.balances(address);
 }
