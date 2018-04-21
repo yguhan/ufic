@@ -50,7 +50,7 @@ export function getAssetAmountWithNameById(amount, assetId) {
             return `${amount / 10**Constants.UFIC_ASSET_DECIMALS} UFIC`;
         }
         default: {
-            return `${amount}? Unknown`;
+            return `${amount} ${parseShortenString(assetId)}`;
         }
     }
 }
