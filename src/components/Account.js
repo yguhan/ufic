@@ -22,7 +22,7 @@ class Account extends Component {
         this.setState({
             fetching: true,
         });
-        let txList = await API.getTxs(Constants.UFIC_WALLET_ADDRESS); 
+        let txList = await API.getV1Txs(Constants.UFIC_WALLET_ADDRESS); 
 
         this.setState({
             txList: txList,
